@@ -20,7 +20,7 @@ class ColorName {
   static const Color darkGrey = Color(0xFF646C8C);
 
   /// Color: #9494ac
-  static const Color ligthGrey = Color(0xFF9494AC);
+  static const Color lightGrey = Color(0xFF9494AC);
 
   /// Color: #252B5C
   static const Color primaryColor = Color(0xFF252B5C);
