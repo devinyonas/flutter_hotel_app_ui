@@ -4,6 +4,7 @@ import 'package:flutter_hotel_app_ui/gen/assets.gen.dart';
 import 'package:flutter_hotel_app_ui/gen/colors.gen.dart';
 import 'package:flutter_hotel_app_ui/gen/fonts.gen.dart';
 import 'package:flutter_hotel_app_ui/presenter/ui/screens/home_screen.dart';
+import 'package:flutter_hotel_app_ui/presenter/ui/screens/map_screen.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class Dashboard extends HookWidget {
@@ -18,12 +19,11 @@ class Dashboard extends HookWidget {
       backgroundColor: ColorName.blue,
       bottomNavigationBar: _BottomNavBar(tabController: tabController),
       body: TabBarView(
+        physics: const NeverScrollableScrollPhysics(),
         controller: tabController,
         children: const [
           HomeScreen(),
-          Center(
-            child: Text('Map'),
-          ),
+          MapScreen(),
           Center(
             child: Text('Booking'),
           ),
