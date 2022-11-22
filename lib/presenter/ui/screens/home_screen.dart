@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_hotel_app_ui/gen/assets.gen.dart';
 import 'package:flutter_hotel_app_ui/gen/colors.gen.dart';
-import 'package:flutter_hotel_app_ui/model/hotel_model.dart';
+import 'package:flutter_hotel_app_ui/presenter/controller/hotel_data_controller.dart';
+import 'package:flutter_hotel_app_ui/presenter/ui/widgets/app_button.dart';
+import 'package:flutter_hotel_app_ui/presenter/ui/widgets/hotel_card_widget.dart';
+import 'package:flutter_hotel_app_ui/presenter/ui/widgets/label_input_widget.dart';
 import 'package:flutter_hotel_app_ui/utilities/constanst.dart';
-import 'package:flutter_hotel_app_ui/view/widgets/app_button.dart';
-import 'package:flutter_hotel_app_ui/view/widgets/hotel_card_widget.dart';
-import 'package:flutter_hotel_app_ui/view/widgets/label_input_widget.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -23,17 +24,14 @@ class HomeScreen extends StatelessWidget {
         ),
         Padding(
           padding: const EdgeInsets.only(left: 24.0, right: 24, top: 16),
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: const [
-                SizedBox(height: 16),
-                _HeaderSection(),
-                SearchCard(),
-                SizedBox(height: 24),
-                NearbyHotelSection(),
-              ],
-            ),
+          child: Column(
+            children: const [
+              SizedBox(height: 16),
+              _HeaderSection(),
+              SearchCard(),
+              SizedBox(height: 24),
+              Flexible(child: NearbyHotelSection()),
+            ],
           ),
         ),
       ],
@@ -146,13 +144,14 @@ class SearchCard extends HookWidget {
   }
 }
 
-class NearbyHotelSection extends StatelessWidget {
+class NearbyHotelSection extends ConsumerWidget {
   const NearbyHotelSection({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final hotelDataController = ref.watch(hotelDataControllerProvider);
+    final listHotel = hotelDataController.listHotel;
     return Column(
-      mainAxisSize: MainAxisSize.min,
       children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -173,15 +172,17 @@ class NearbyHotelSection extends StatelessWidget {
             ),
           ],
         ),
-        ListView.builder(
-            physics: const NeverScrollableScrollPhysics(),
-            padding: const EdgeInsets.all(0),
-            shrinkWrap: true,
-            itemCount: mockListHotels.length,
-            itemBuilder: (context, index) {
-              final hotel = mockListHotels[index];
-              return HotelCardWidget(hotelModel: hotel);
-            })
+        const SizedBox(height: 4),
+        Flexible(
+          child: ListView.builder(
+              padding: const EdgeInsets.all(0),
+              shrinkWrap: true,
+              itemCount: listHotel.length,
+              itemBuilder: (context, index) {
+                final hotel = listHotel[index];
+                return HotelCardWidget(hotelModel: hotel);
+              }),
+        )
       ],
     );
   }

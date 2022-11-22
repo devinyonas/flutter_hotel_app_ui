@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hotel_app_ui/domain/model/hotel_model.dart';
 import 'package:flutter_hotel_app_ui/gen/assets.gen.dart';
 import 'package:flutter_hotel_app_ui/gen/colors.gen.dart';
-import 'package:flutter_hotel_app_ui/model/hotel_model.dart';
+import 'package:flutter_hotel_app_ui/presenter/ui/widgets/rating_widget.dart';
 import 'package:flutter_hotel_app_ui/utilities/app_text.dart';
 import 'package:flutter_hotel_app_ui/utilities/constanst.dart';
-import 'package:flutter_hotel_app_ui/view/widgets/rating_widget.dart';
 
 class HotelCardWidget extends StatelessWidget {
   final HotelModel hotelModel;

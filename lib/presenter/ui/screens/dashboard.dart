@@ -3,7 +3,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_hotel_app_ui/gen/assets.gen.dart';
 import 'package:flutter_hotel_app_ui/gen/colors.gen.dart';
 import 'package:flutter_hotel_app_ui/gen/fonts.gen.dart';
-import 'package:flutter_hotel_app_ui/view/screens/home_screen.dart';
+import 'package:flutter_hotel_app_ui/presenter/ui/screens/home_screen.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class Dashboard extends HookWidget {
