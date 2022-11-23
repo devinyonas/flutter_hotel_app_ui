@@ -29,25 +29,23 @@ class _SystemHash {
   }
 }
 
-String $selectedHotelHash() => r'e8b8d90291526b9ee74f6c79afe0932383085937';
+String $HotelDataControllerHash() =>
+    r'f8b62fef0c6d06ba5b8fb60188241a9462f522f0';
 
-/// See also [selectedHotel].
-final selectedHotelProvider = AutoDisposeProvider<HotelModel>(
-  selectedHotel,
-  name: r'selectedHotelProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : $selectedHotelHash,
-);
-typedef SelectedHotelRef = AutoDisposeProviderRef<HotelModel>;
-String $hotelDataControllerHash() =>
-    r'fdbc349d5695c494b195f748e2deb4398f573242';
-
-/// See also [hotelDataController].
-final hotelDataControllerProvider = AutoDisposeProvider<HotelDataController>(
-  hotelDataController,
+/// See also [HotelDataController].
+final hotelDataControllerProvider =
+    AutoDisposeAsyncNotifierProvider<HotelDataController, HotelModel>(
+  HotelDataController.new,
   name: r'hotelDataControllerProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : $hotelDataControllerHash,
+      : $HotelDataControllerHash,
 );
-typedef HotelDataControllerRef = AutoDisposeProviderRef<HotelDataController>;
+typedef HotelDataControllerRef
+    = AutoDisposeAsyncNotifierProviderRef<HotelModel>;
+
+abstract class _$HotelDataController
+    extends AutoDisposeAsyncNotifier<HotelModel> {
+  @override
+  FutureOr<HotelModel> build();
+}

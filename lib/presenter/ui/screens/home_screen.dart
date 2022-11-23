@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:flutter_hotel_app_ui/domain/model/hotel_model.dart';
+import 'package:flutter_hotel_app_ui/domain/repository/hotel_repository.dart';
 import 'package:flutter_hotel_app_ui/gen/assets.gen.dart';
 import 'package:flutter_hotel_app_ui/gen/colors.gen.dart';
-import 'package:flutter_hotel_app_ui/presenter/controller/hotel_data_controller.dart';
 import 'package:flutter_hotel_app_ui/presenter/ui/widgets/app_button.dart';
 import 'package:flutter_hotel_app_ui/presenter/ui/widgets/hotel_card_widget.dart';
 import 'package:flutter_hotel_app_ui/presenter/ui/widgets/label_input_widget.dart';
@@ -149,8 +150,7 @@ class NearbyHotelSection extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final hotelDataController = ref.watch(hotelDataControllerProvider);
-    final listHotel = hotelDataController.listHotel;
+    final hotelRepo = ref.watch(hotelRepositoryProvider);
     return Column(
       children: [
         Row(
@@ -174,13 +174,21 @@ class NearbyHotelSection extends ConsumerWidget {
         ),
         const SizedBox(height: 4),
         Flexible(
-          child: ListView.builder(
-              padding: const EdgeInsets.all(0),
-              shrinkWrap: true,
-              itemCount: listHotel.length,
-              itemBuilder: (context, index) {
-                final hotel = listHotel[index];
-                return HotelCardWidget(hotelModel: hotel);
+          child: FutureBuilder<List<HotelModel>>(
+              future: hotelRepo.getHotelList(),
+              builder: (context, snapshot) {
+                final listHotel = snapshot.data;
+                if (listHotel == null) {
+                  return const Center(child: CircularProgressIndicator());
+                }
+                return ListView.builder(
+                    padding: const EdgeInsets.all(0),
+                    shrinkWrap: true,
+                    itemCount: listHotel.length,
+                    itemBuilder: (context, index) {
+                      final hotel = listHotel[index];
+                      return HotelCardWidget(hotelModel: hotel);
+                    });
               }),
         )
       ],

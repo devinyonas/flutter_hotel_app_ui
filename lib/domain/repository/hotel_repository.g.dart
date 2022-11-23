@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'location_controller.dart';
+part of 'hotel_repository.dart';
 
 // **************************************************************************
 // RiverpodGenerator
@@ -29,16 +29,14 @@ class _SystemHash {
   }
 }
 
-String $locationControllerHash() => r'21d63bcc50765e6aaf7d121d2f5d94f23be3b3e4';
+String $hotelRepositoryHash() => r'2d5a61d3dc80651e3ce40d818185e775764e1742';
 
-/// See also [locationController].
-final locationControllerProvider =
-    AutoDisposeFutureProvider<LocationController>(
-  locationController,
-  name: r'locationControllerProvider',
+/// See also [hotelRepository].
+final hotelRepositoryProvider = AutoDisposeProvider<HotelRepository>(
+  hotelRepository,
+  name: r'hotelRepositoryProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : $locationControllerHash,
+      : $hotelRepositoryHash,
 );
-typedef LocationControllerRef
-    = AutoDisposeFutureProviderRef<LocationController>;
+typedef HotelRepositoryRef = AutoDisposeProviderRef<HotelRepository>;

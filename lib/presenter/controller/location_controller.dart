@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_hotel_app_ui/domain/repository/hotel_repository.dart';
 import 'package:flutter_hotel_app_ui/presenter/controller/hotel_data_controller.dart';
 import 'package:flutter_hotel_app_ui/presenter/ui/widgets/map_marker_widget.dart';
 import 'package:flutter_hotel_app_ui/utilities/constanst.dart';
@@ -11,16 +12,18 @@ import 'package:widget_marker_google_map/widget_marker_google_map.dart';
 part 'location_controller.g.dart';
 
 @riverpod
-LocationController locationControllerProvider(
-    LocationControllerProviderRef ref) {
-  final hotelController = ref.watch(hotelDataControllerProvider);
+Future<LocationController> locationController(LocationControllerRef ref) async {
+  final hotelControllerNotifier =
+      ref.watch(hotelDataControllerProvider.notifier);
+  final hotelRepo = ref.watch(hotelRepositoryProvider);
   final locationController = LocationController();
-  final markers = hotelController.listHotel
+
+  final markers = (await hotelRepo.getHotelList())
       .map((hotel) => WidgetMarker(
             markerId: hotel.coordinate.toString(),
             position: hotel.coordinate,
             onTap: () async {
-              hotelController.setSelectedHotel(hotel);
+              hotelControllerNotifier.setSelectedHotel(hotel);
               await locationController.setNewLocation(
                   hotel.coordinate.latitude, hotel.coordinate.longitude);
             },
@@ -36,7 +39,7 @@ class LocationController {
   final defaultLocation = const LatLng(-7.795529617707741, 110.36872726427349);
   final globalMarkerKey = GlobalKey();
   final Completer<GoogleMapController> _mapController = Completer();
-  late final LatLng _currentLocation;
+  LatLng _currentLocation = const LatLng(0, 0);
   final Set<WidgetMarker> _markers = {};
 
   LatLng get currentLocation => _currentLocation;
@@ -48,7 +51,6 @@ class LocationController {
 
   Future<void> setNewLocation(double lat, double lng) async {
     _currentLocation = LatLng(lat, lng);
-
     CameraPosition cameraPos =
         CameraPosition(target: _currentLocation, zoom: 15);
     final GoogleMapController controller = await _mapController.future;

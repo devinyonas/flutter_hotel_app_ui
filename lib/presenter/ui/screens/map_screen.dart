@@ -10,33 +10,36 @@ class MapScreen extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final locationController = ref.watch(locationControllerProviderProvider);
+    final locationController = ref.watch(locationControllerProvider);
     final hotelController = ref.watch(hotelDataControllerProvider);
-    return MaterialApp(
-      home: Scaffold(
-        body: Stack(
-          children: [
-            WidgetMarkerGoogleMap(
-              onMapCreated: locationController.onMapCreated,
-              initialCameraPosition: CameraPosition(
-                target: locationController.defaultLocation,
-                zoom: 12.0,
+    return Scaffold(
+      body: locationController.when(
+          data: (controller) => Stack(
+                children: [
+                  WidgetMarkerGoogleMap(
+                    onMapCreated: controller.onMapCreated,
+                    initialCameraPosition: CameraPosition(
+                      target: controller.defaultLocation,
+                      zoom: 12.0,
+                    ),
+                    widgetMarkers: controller.markers,
+                    zoomControlsEnabled: false,
+                  ),
+                  hotelController.maybeWhen(
+                      data: (hotel) => Align(
+                            alignment: Alignment.bottomCenter,
+                            child: Padding(
+                              padding: const EdgeInsets.all(16),
+                              child: HotelCardWidget(
+                                hotelModel: hotel,
+                              ),
+                            ),
+                          ),
+                      orElse: () => const SizedBox.shrink())
+                ],
               ),
-              widgetMarkers: locationController.markers,
-              zoomControlsEnabled: false,
-            ),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: Padding(
-                padding: const EdgeInsets.all(16),
-                child: HotelCardWidget(
-                  hotelModel: hotelController.selectedHotel,
-                ),
-              ),
-            )
-          ],
-        ),
-      ),
+          error: (e, s) => const SizedBox.shrink(),
+          loading: () => const Center(child: CircularProgressIndicator())),
     );
   }
 }
