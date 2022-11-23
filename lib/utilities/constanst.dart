@@ -6,4 +6,8 @@ extension MoneyExtention on num {
   String moneyFormat() {
     return '\$${floor()}';
   }
+
+  String toUSD() {
+    return '${floor()} USD';
+  }
 }

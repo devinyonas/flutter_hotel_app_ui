@@ -2,8 +2,11 @@ import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_hotel_app_ui/presenter/controller/hotel_data_controller.dart';
+import 'package:flutter_hotel_app_ui/presenter/ui/widgets/map_marker_widget.dart';
+import 'package:flutter_hotel_app_ui/utilities/constanst.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:widget_marker_google_map/widget_marker_google_map.dart';
 
 part 'location_controller.g.dart';
 
@@ -13,14 +16,15 @@ LocationController locationControllerProvider(
   final hotelController = ref.watch(hotelDataControllerProvider);
   final locationController = LocationController();
   final markers = hotelController.listHotel
-      .map((hotel) => Marker(
-            markerId: MarkerId(hotel.coordinate.toString()),
+      .map((hotel) => WidgetMarker(
+            markerId: hotel.coordinate.toString(),
             position: hotel.coordinate,
             onTap: () async {
               hotelController.setSelectedHotel(hotel);
               await locationController.setNewLocation(
                   hotel.coordinate.latitude, hotel.coordinate.longitude);
             },
+            widget: MapMarker(hotel.price.toUSD()),
           ))
       .toSet();
   locationController.setMarker(markers: markers);
@@ -33,10 +37,10 @@ class LocationController {
   final globalMarkerKey = GlobalKey();
   final Completer<GoogleMapController> _mapController = Completer();
   late final LatLng _currentLocation;
-  final Set<Marker> _markers = {};
+  final Set<WidgetMarker> _markers = {};
 
   LatLng get currentLocation => _currentLocation;
-  Set<Marker> get markers => _markers;
+  List<WidgetMarker> get markers => _markers.toList(growable: false);
 
   void onMapCreated(GoogleMapController controller) {
     _mapController.complete(controller);
@@ -51,7 +55,7 @@ class LocationController {
     controller.animateCamera(CameraUpdate.newCameraPosition(cameraPos));
   }
 
-  void setMarker({required Set<Marker> markers}) {
+  void setMarker({required Set<WidgetMarker> markers}) {
     _markers.addAll(markers);
   }
 }

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hotel_app_ui/presenter/controller/hotel_data_controller.dart';
 import 'package:flutter_hotel_app_ui/presenter/controller/location_controller.dart';
 import 'package:flutter_hotel_app_ui/presenter/ui/widgets/hotel_card_widget.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:widget_marker_google_map/widget_marker_google_map.dart';
 
 class MapScreen extends HookConsumerWidget {
   const MapScreen({Key? key}) : super(key: key);
@@ -16,13 +16,14 @@ class MapScreen extends HookConsumerWidget {
       home: Scaffold(
         body: Stack(
           children: [
-            GoogleMap(
+            WidgetMarkerGoogleMap(
               onMapCreated: locationController.onMapCreated,
               initialCameraPosition: CameraPosition(
                 target: locationController.defaultLocation,
                 zoom: 12.0,
               ),
-              markers: locationController.markers,
+              widgetMarkers: locationController.markers,
+              zoomControlsEnabled: false,
             ),
             Align(
               alignment: Alignment.bottomCenter,
