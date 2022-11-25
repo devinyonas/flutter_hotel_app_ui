@@ -89,6 +89,7 @@ class AppTextSpan extends TextSpan {
   final TextAlign? textAlign;
   final double? height;
   final double fontSize;
+  final double? letterSpacing;
 
   AppTextSpan.large(String data,
       {this.color = ColorName.primaryColor,
@@ -96,6 +97,7 @@ class AppTextSpan extends TextSpan {
       this.textAlign,
       this.height,
       this.fontSize = 24,
+      this.letterSpacing,
       GestureRecognizer? recognizer})
       : super(
             text: data,
@@ -105,6 +107,7 @@ class AppTextSpan extends TextSpan {
                 fontSize: fontSize,
                 color: color,
                 height: height,
+                letterSpacing: letterSpacing,
                 fontWeight: fontWeight));
 
   AppTextSpan.medium(String data,
@@ -113,6 +116,8 @@ class AppTextSpan extends TextSpan {
       this.textAlign,
       this.height,
       this.fontSize = 14,
+      this.letterSpacing,
+      TextDecoration textDecoration = TextDecoration.none,
       GestureRecognizer? recognizer})
       : super(
             text: data,
@@ -122,6 +127,8 @@ class AppTextSpan extends TextSpan {
                 fontSize: fontSize,
                 color: color,
                 height: height,
+                letterSpacing: letterSpacing,
+                decoration: textDecoration,
                 fontWeight: fontWeight));
 
   AppTextSpan.small(String data,
@@ -130,7 +137,7 @@ class AppTextSpan extends TextSpan {
       this.textAlign,
       this.height,
       this.fontSize = 12,
-      double spacing = 1,
+      this.letterSpacing = 1,
       GestureRecognizer? recognizer})
       : super(
             text: data,
@@ -140,6 +147,6 @@ class AppTextSpan extends TextSpan {
                 fontSize: fontSize,
                 color: color,
                 height: height,
-                letterSpacing: spacing,
+                letterSpacing: letterSpacing,
                 fontWeight: fontWeight));
 }

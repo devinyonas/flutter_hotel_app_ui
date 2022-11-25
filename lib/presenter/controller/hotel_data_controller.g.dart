@@ -30,7 +30,7 @@ class _SystemHash {
 }
 
 String $HotelDataControllerHash() =>
-    r'f8b62fef0c6d06ba5b8fb60188241a9462f522f0';
+    r'71f44fee87ef65ba990724931fe189d60ed51e2d';
 
 /// See also [HotelDataController].
 final hotelDataControllerProvider =

@@ -45,6 +45,9 @@ class $AssetsIconGen {
   /// File path: assets/icon/pin.svg
   SvgGenImage get pin => const SvgGenImage('assets/icon/pin.svg');
 
+  /// File path: assets/icon/pin_png.png
+  AssetGenImage get pinPng => const AssetGenImage('assets/icon/pin_png.png');
+
   /// File path: assets/icon/profile.svg
   SvgGenImage get profile => const SvgGenImage('assets/icon/profile.svg');
 
@@ -52,7 +55,7 @@ class $AssetsIconGen {
   SvgGenImage get wishlist => const SvgGenImage('assets/icon/wishlist.svg');
 
   /// List of all assets
-  List<SvgGenImage> get values => [
+  List<dynamic> get values => [
         booking,
         calendar,
         chevronDown,
@@ -62,6 +65,7 @@ class $AssetsIconGen {
         map,
         notification,
         pin,
+        pinPng,
         profile,
         wishlist
       ];
@@ -89,6 +93,9 @@ class $AssetsImageGen {
   /// File path: assets/image/photo.png
   AssetGenImage get photo => const AssetGenImage('assets/image/photo.png');
 
+  /// File path: assets/image/sign-in.png
+  AssetGenImage get signIn => const AssetGenImage('assets/image/sign-in.png');
+
   /// File path: assets/image/thumbnail1.png
   AssetGenImage get thumbnail1 =>
       const AssetGenImage('assets/image/thumbnail1.png');
@@ -98,8 +105,16 @@ class $AssetsImageGen {
       const AssetGenImage('assets/image/thumbnail2.png');
 
   /// List of all assets
-  List<AssetGenImage> get values =>
-      [gallery1, gallery2, gallery3, hotelImage, photo, thumbnail1, thumbnail2];
+  List<AssetGenImage> get values => [
+        gallery1,
+        gallery2,
+        gallery3,
+        hotelImage,
+        photo,
+        signIn,
+        thumbnail1,
+        thumbnail2
+      ];
 }
 
 class $AssetsIconAmenitiesGen {

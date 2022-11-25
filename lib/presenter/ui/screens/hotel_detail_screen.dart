@@ -231,7 +231,7 @@ class _LocationSection extends StatelessWidget {
   }) : super(key: key);
 
   Future<BitmapDescriptor?> _convertToMarkerBitMap() async {
-    final data = await rootBundle.load('assets/icon/pin_png.png');
+    final data = await rootBundle.load(Assets.icon.pinPng.path);
     final uint8List = data.buffer.asUint8List();
     return BitmapDescriptor.fromBytes(uint8List);
   }
