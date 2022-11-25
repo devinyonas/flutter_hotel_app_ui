@@ -58,6 +58,10 @@ class _BottomNavBar extends StatelessWidget {
           fontFamily: FontFamily.workSans,
           fontWeight: FontWeight.w600,
         ),
+        onTap: (index) {
+          // Disable tab index 2 and 3
+          tabController.index = index > 1 ? tabController.previousIndex : index;
+        },
         tabs: [
           _TabButton(
             iconPath: Assets.icon.home.path,
@@ -72,12 +76,10 @@ class _BottomNavBar extends StatelessWidget {
           _TabButton(
             iconPath: Assets.icon.booking.path,
             text: 'Booking',
-            isSelected: tabController.index == 2,
           ),
           _TabButton(
             iconPath: Assets.icon.profile.path,
             text: 'Profile',
-            isSelected: tabController.index == 3,
           ),
         ],
       ),

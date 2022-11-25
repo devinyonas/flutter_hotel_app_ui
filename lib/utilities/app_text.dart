@@ -33,17 +33,19 @@ class AppText extends Text {
                 overflow: textOverflow,
                 letterSpacing: letterSpacing));
 
-  AppText.medium(String data,
-      {Key? key,
-      this.color = ColorName.primaryColor,
-      this.fontWeight = FontWeight.w600,
-      TextAlign textAlign = TextAlign.left,
-      int? maxLine,
-      TextOverflow? textOverflow,
-      this.height,
-      this.letterSpacing,
-      this.fontSize = 14})
-      : super(data,
+  AppText.medium(
+    String data, {
+    Key? key,
+    this.color = ColorName.primaryColor,
+    this.fontWeight = FontWeight.w600,
+    TextAlign textAlign = TextAlign.left,
+    int? maxLine,
+    TextOverflow? textOverflow,
+    this.height,
+    this.letterSpacing,
+    this.fontSize = 14,
+    TextDecoration textDecoration = TextDecoration.none,
+  }) : super(data,
             key: key,
             textAlign: textAlign,
             maxLines: maxLine,
@@ -54,6 +56,7 @@ class AppText extends Text {
                 height: height,
                 fontWeight: fontWeight,
                 overflow: textOverflow,
+                decoration: textDecoration,
                 letterSpacing: letterSpacing));
 
   AppText.large(String data,

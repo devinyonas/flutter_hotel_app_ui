@@ -5,6 +5,7 @@ import 'package:flutter_hotel_app_ui/domain/repository/hotel_repository.dart';
 import 'package:flutter_hotel_app_ui/gen/assets.gen.dart';
 import 'package:flutter_hotel_app_ui/gen/colors.gen.dart';
 import 'package:flutter_hotel_app_ui/presenter/ui/widgets/app_button.dart';
+import 'package:flutter_hotel_app_ui/presenter/ui/widgets/app_icon_container_widget.dart';
 import 'package:flutter_hotel_app_ui/presenter/ui/widgets/hotel_card_widget.dart';
 import 'package:flutter_hotel_app_ui/presenter/ui/widgets/label_input_widget.dart';
 import 'package:flutter_hotel_app_ui/utilities/constanst.dart';
@@ -55,16 +56,7 @@ class _HeaderSection extends StatelessWidget {
               radius: 25,
               backgroundImage: Assets.image.photo.provider(),
             ),
-            Container(
-              padding: const EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(18),
-              ),
-              child: Center(
-                child: Assets.icon.notification.svg(height: 25),
-              ),
-            )
+            AppIconContainer(Assets.icon.notification.svg(height: 25)),
           ],
         ),
         const Padding(

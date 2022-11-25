@@ -4,9 +4,13 @@ import 'package:flutter_hotel_app_ui/utilities/app_text.dart';
 
 class RatingWidget extends StatelessWidget {
   final double ratingScore;
+  final int totalReviewer;
   final bool showReviews;
   const RatingWidget(
-      {required this.ratingScore, this.showReviews = false, Key? key})
+      {required this.ratingScore,
+      this.totalReviewer = 0,
+      this.showReviews = false,
+      Key? key})
       : super(key: key);
 
   @override
@@ -26,7 +30,15 @@ class RatingWidget extends StatelessWidget {
             ),
           ),
         const SizedBox(width: 12),
-        AppText.medium('$ratingScore', fontWeight: FontWeight.bold)
+        AppText.medium('${ratingScore > 5 ? 5.0 : ratingScore}',
+            fontWeight: FontWeight.bold),
+        if (showReviews) ...[
+          const SizedBox(width: 12),
+          AppText.medium(
+            '($totalReviewer ${totalReviewer > 1 ? 'reviews' : 'review'})',
+            textDecoration: TextDecoration.underline,
+          ),
+        ],
       ],
     );
   }

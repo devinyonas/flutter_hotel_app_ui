@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hotel_app_ui/domain/model/hotel_model.dart';
 import 'package:flutter_hotel_app_ui/gen/assets.gen.dart';
 import 'package:flutter_hotel_app_ui/gen/colors.gen.dart';
+import 'package:flutter_hotel_app_ui/presenter/ui/screens/hotel_detail_screen.dart';
+import 'package:flutter_hotel_app_ui/presenter/ui/widgets/price_night_text_widget.dart';
 import 'package:flutter_hotel_app_ui/presenter/ui/widgets/rating_widget.dart';
 import 'package:flutter_hotel_app_ui/utilities/app_text.dart';
-import 'package:flutter_hotel_app_ui/utilities/constanst.dart';
 
 class HotelCardWidget extends StatelessWidget {
   final HotelModel hotelModel;
@@ -19,6 +20,11 @@ class HotelCardWidget extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         // (TODO) Goto detail
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => HotelDetailScreen(hotel: hotelModel)),
+        );
       },
       child: Container(
         margin: const EdgeInsets.symmetric(vertical: 6),
@@ -36,7 +42,7 @@ class HotelCardWidget extends StatelessWidget {
                   bottomLeft: Radius.circular(borderRadius),
                 ),
                 child: Image.asset(
-                  hotelModel.imagePath,
+                  hotelModel.thumbnailPath,
                   fit: BoxFit.cover,
                 ),
               ),
@@ -70,14 +76,7 @@ class HotelCardWidget extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(vertical: 12),
                       child: RatingWidget(ratingScore: hotelModel.ratingScore),
                     ),
-                    RichText(
-                      text: TextSpan(
-                        children: [
-                          AppTextSpan.large(hotelModel.price.moneyFormat()),
-                          AppTextSpan.medium(' /night')
-                        ],
-                      ),
-                    ),
+                    PricePerNightTextWidget(hotelModel.price),
                   ],
                 ),
               ),
