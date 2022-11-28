@@ -6,12 +6,9 @@ import 'package:flutter_hotel_app_ui/presenter/ui/screens/sign_in_screen.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized(); // Required by FlutterConfig
+  WidgetsFlutterBinding.ensureInitialized();
   await FlutterConfig.loadEnvVariables();
-
-  runApp(
-    const ProviderScope(child: HotelApp()),
-  );
+  runApp(const ProviderScope(child: HotelApp()));
 }
 
 class HotelApp extends StatelessWidget {
