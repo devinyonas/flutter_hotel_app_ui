@@ -2,16 +2,17 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_hotel_app_ui/domain/model/hotel_model.dart';
-import 'package:flutter_hotel_app_ui/gen/assets.gen.dart';
-import 'package:flutter_hotel_app_ui/gen/colors.gen.dart';
-import 'package:flutter_hotel_app_ui/presenter/ui/widgets/app_button.dart';
-import 'package:flutter_hotel_app_ui/presenter/ui/widgets/app_icon_container_widget.dart';
-import 'package:flutter_hotel_app_ui/presenter/ui/widgets/facilities_section_widget.dart';
-import 'package:flutter_hotel_app_ui/presenter/ui/widgets/price_night_text_widget.dart';
-import 'package:flutter_hotel_app_ui/presenter/ui/widgets/rating_widget.dart';
-import 'package:flutter_hotel_app_ui/utilities/app_text.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+
+import '../../../domain/model/hotel_model.dart';
+import '../../../gen/assets.gen.dart';
+import '../../../gen/colors.gen.dart';
+import '../../../utilities/app_text.dart';
+import '../widgets/app_button.dart';
+import '../widgets/app_icon_container_widget.dart';
+import '../widgets/facilities_section_widget.dart';
+import '../widgets/price_night_text_widget.dart';
+import '../widgets/rating_widget.dart';
 
 class HotelDetailScreen extends StatelessWidget {
   final HotelModel hotel;
