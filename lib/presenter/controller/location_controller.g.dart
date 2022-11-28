@@ -29,7 +29,7 @@ class _SystemHash {
   }
 }
 
-String $locationControllerHash() => r'21d63bcc50765e6aaf7d121d2f5d94f23be3b3e4';
+String $locationControllerHash() => r'3b9f6bc95e49344dffca991bf404864031f8e6b0';
 
 /// See also [locationController].
 final locationControllerProvider =

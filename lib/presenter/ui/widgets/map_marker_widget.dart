@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hotel_app_ui/gen/colors.gen.dart';
 import 'package:flutter_hotel_app_ui/utilities/app_text.dart';
 
-class MapMarker extends StatelessWidget {
+class MapMarkerPrice extends StatelessWidget {
   final String price;
-  const MapMarker(this.price, {Key? key}) : super(key: key);
+  const MapMarkerPrice(this.price, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

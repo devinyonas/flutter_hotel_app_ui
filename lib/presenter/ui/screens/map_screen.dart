@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hotel_app_ui/utilities/custom_marker_map/custom_marker_map_widget.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+
 // import 'package:widget_marker_google_map/widget_marker_google_map.dart';
 
 import '../../controller/hotel_data_controller.dart';
@@ -18,35 +20,26 @@ class MapScreen extends HookConsumerWidget {
       body: locationController.when(
           data: (controller) => Stack(
                 children: [
-                  GoogleMap(
+                  CustomMarkerMap(
                     onMapCreated: controller.onMapCreated,
                     initialCameraPosition: CameraPosition(
                       target: controller.defaultLocation,
                       zoom: 12.0,
                     ),
-                    markers: controller.markers,
+                    markerWidgets: controller.markers,
                     // widgetMarkers: controller.markers,
                   ),
-                  // WidgetMarkerGoogleMap(
-                  //   onMapCreated: controller.onMapCreated,
-                  //   initialCameraPosition: CameraPosition(
-                  //     target: controller.defaultLocation,
-                  //     zoom: 12.0,
-                  //   ),
-                  //   widgetMarkers: controller.markers,
-                  //   zoomControlsEnabled: false,
-                  // ),
-                  // hotelController.maybeWhen(
-                  //     data: (hotel) => Align(
-                  //           alignment: Alignment.bottomCenter,
-                  //           child: Padding(
-                  //             padding: const EdgeInsets.all(16),
-                  //             child: HotelCardWidget(
-                  //               hotelModel: hotel,
-                  //             ),
-                  //           ),
-                  //         ),
-                  //     orElse: () => const SizedBox.shrink())
+                  hotelController.maybeWhen(
+                      data: (hotel) => Align(
+                            alignment: Alignment.bottomCenter,
+                            child: Padding(
+                              padding: const EdgeInsets.all(16),
+                              child: HotelCardWidget(
+                                hotelModel: hotel,
+                              ),
+                            ),
+                          ),
+                      orElse: () => const SizedBox.shrink())
                 ],
               ),
           error: (e, s) => const SizedBox.shrink(),
