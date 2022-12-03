@@ -17,6 +17,7 @@ class HotelApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Hotel App UI',
       theme: ThemeData(
         fontFamily: FontFamily.workSans,
