@@ -1,6 +1,6 @@
 # flutter_hotel_app_ui
 
-A Flutter hotel booking app. UI by [maxonflutter]([https://maxonflutter.com](https://www.youtube.com/watch?v=3VWfzCpfRCg))
+A Flutter hotel booking app. UI by [maxonflutter](https://www.youtube.com/watch?v=3VWfzCpfRCg)
 
 ## Dependencies
 
